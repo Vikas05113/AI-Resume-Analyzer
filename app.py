@@ -115,7 +115,7 @@ def home_page():
     """, unsafe_allow_html=True)
 
 
-    st.title("         AI Career Platform")
+    st.title("         CareerPilot AI")
 
 
     # ---------- Welcome Card ----------
