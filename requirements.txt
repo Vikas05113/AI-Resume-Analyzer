@@ -1,4 +1,6 @@
 streamlit
+matplotlib
+wordcloud
 PyPDF2
 pandas
 scikit-learn
