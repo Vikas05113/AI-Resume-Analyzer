@@ -33,6 +33,7 @@ animation: gradient 12s ease infinite;
 """, unsafe_allow_html=True)
 
 
+
 # ---------- SESSION ----------
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
@@ -87,43 +88,107 @@ def login():
 # ---------- HOME ----------
 def home_page():
 
-    st.title("🚀 AI Career Platform")
-
+    # ---------- Home Page Style ----------
     st.markdown("""
-### Welcome 👋
+    <style>
 
-This platform helps students and professionals:
+    .home-card{
+        background: rgba(255,255,255,0.08);
+        backdrop-filter: blur(12px);
+        padding:25px;
+        border-radius:15px;
+        box-shadow:0 8px 20px rgba(0,0,0,0.3);
+        margin-bottom:20px;
+    }
 
-- 📄 Analyze resumes  
-- 📊 Check job match percentage  
-- 🎓 Get career guidance  
-- 💼 Discover job platforms  
+    .metric-card{
+        background: linear-gradient(135deg,#00c6ff,#0072ff);
+        padding:20px;
+        border-radius:12px;
+        text-align:center;
+        color:white;
+        font-size:18px;
+        font-weight:bold;
+    }
 
-Upload your resume and discover how well it matches your dream job.
-""")
+    </style>
+    """, unsafe_allow_html=True)
 
+
+    st.title("         AI Career Platform")
+
+
+    # ---------- Welcome Card ----------
+    st.markdown("""
+    <div class="home-card">
+
+    <h3>Welcome 👋</h3>
+
+    This platform helps students and professionals:
+
+    📄 Analyze resumes  
+    📊 Check job match percentage  
+    🎓 Get career guidance  
+    💼 Discover job platforms  
+
+    Upload your resume and discover how well it matches your dream job.
+
+    </div>
+    """, unsafe_allow_html=True)
+
+
+    # ---------- Metrics ----------
     col1,col2,col3 = st.columns(3)
 
     with col1:
-        st.metric("AI Job Roles", "15+")
+        st.markdown("""
+        <div class="metric-card">
+        🤖 AI Job Roles<br>
+        15+
+        </div>
+        """, unsafe_allow_html=True)
 
     with col2:
-        st.metric("Resume Analysis", "Instant")
+        st.markdown("""
+        <div class="metric-card">
+        📄 Resume Analysis<br>
+        Instant
+        </div>
+        """, unsafe_allow_html=True)
 
     with col3:
-        st.metric("Career Domains", "4+")
+        st.markdown("""
+        <div class="metric-card">
+        🎓 Career Domains<br>
+        15+
+        </div>
+        """, unsafe_allow_html=True)
+
 
     st.markdown("---")
 
+
+    # ---------- Tech Domains ----------
     st.subheader("🔥 Popular Tech Career Domains")
 
-    st.write("""
-• Artificial Intelligence / Machine Learning  
-• Web Development  
-• Data Science  
-• Cyber Security  
-• Cloud Computing  
-""")
+    st.markdown("""
+    - 🤖 Artificial Intelligence / Machine Learning  
+    - 🌐 Web Development  
+    - 📊 Data Science  
+    - 🔐 Cyber Security  
+    - ☁ Cloud Computing  
+    """)
+
+
+    st.markdown("---")
+
+
+    # ---------- Hero Image ----------
+    st.image(
+        "https://images.unsplash.com/photo-1677442135136-760c813028c0",
+        caption="AI Powered Career Platform",
+        use_container_width=True
+    )
 
 
 # ---------- RESUME ANALYZER ----------
@@ -607,40 +672,7 @@ def career_page():
             st.markdown(f'<span class="skill-badge">{s}</span>', unsafe_allow_html=True)
 
 
-    # ---------- Roles ----------
-    with col2:
-
-        st.subheader("💼 Career Roles")
-
-        for r in roles[domain]:
-            st.markdown(f'<span class="role-badge">{r}</span>', unsafe_allow_html=True)
-
-        st.markdown("### 💰 Average Salary")
-
-        st.markdown(
-        f"""
-        <div class="salary-box">
-        {symbol}{int(converted_salary):,}
-        </div>
-        """,
-        unsafe_allow_html=True
-        )
-
-    st.markdown("---")
-
-    st.subheader("📈 Career Roadmap")
-
-    st.write("""
-1️⃣ Learn programming fundamentals  
-2️⃣ Master the key technologies in the domain  
-3️⃣ Build real-world projects  
-4️⃣ Contribute to open-source projects  
-5️⃣ Apply for internships and entry-level jobs  
-""")
-
-    st.success("💡 Tip: Building real projects and gaining practical experience is the fastest way to grow in tech careers.")
-
-
+    
 # ---------- JOB PLATFORMS ----------
 def jobs_page():
 
@@ -700,34 +732,166 @@ def jobs_page():
 
     st.success("🎯 Pro Tip: Apply to at least **5–10 jobs daily** to increase your chances of getting interviews.")
 
+
+# ---------- AI RESUME BUILDER ----------
+def ai_resume_builder():
+
+    st.subheader("🧠 AI Resume Builder")
+
+    st.markdown("### Build a Professional Resume")
+
+    theme = st.selectbox(
+        "🎨 Select Resume Theme",
+        ["Classic", "Modern", "Professional"]
+    )
+
+    st.markdown("---")
+
+    st.markdown("### 👤 Personal Information")
+
+    col1,col2 = st.columns(2)
+
+    with col1:
+        name = st.text_input("Full Name")
+        email = st.text_input("Email")
+        phone = st.text_input("Phone Number")
+
+    with col2:
+        linkedin = st.text_input("LinkedIn Profile URL")
+        github = st.text_input("GitHub Profile URL")
+        location = st.text_input("Location")
+
+    st.markdown("### 🎓 Education")
+
+    degree = st.text_input("Degree")
+    college = st.text_input("University / College")
+    year = st.text_input("Graduation Year")
+
+    st.markdown("### 🧠 Skills")
+
+    skills = st.text_area("Enter Skills (comma separated)")
+
+    st.markdown("### 💼 Work Experience")
+
+    company = st.text_input("Company Name")
+    role = st.text_input("Role")
+    experience_desc = st.text_area("Describe your work experience")
+
+    st.markdown("### 🚀 Projects")
+
+    project_title = st.text_input("Project Title")
+    project_desc = st.text_area("Project Description")
+    project_link = st.text_input("Project GitHub Link")
+
+    st.markdown("### 🏆 Achievements")
+
+    achievements = st.text_area("Achievements / Certifications")
+
+    st.markdown("---")
+
+    if st.button("Generate Resume"):
+
+        resume = f"""
+{name}
+
+Email: {email}
+Phone: {phone}
+Location: {location}
+
+LinkedIn: {linkedin}
+GitHub: {github}
+
+Education
+{degree}
+{college}
+Graduation: {year}
+
+Skills
+{skills}
+
+Experience
+{company} — {role}
+{experience_desc}
+
+Projects
+{project_title}
+{project_desc}
+
+Achievements
+{achievements}
+"""
+
+        st.markdown("## 📄 Resume Preview")
+
+        st.code(resume)
+
+        st.download_button(
+            "⬇ Download Resume",
+            resume,
+            file_name="resume.txt"
+        )
 # ---------- APP ----------
 if not st.session_state.logged_in:
 
     login()
 
 else:
+    
 
     # ---------- Sidebar Style ----------
     st.markdown("""
     <style>
 
-    [data-testid="stSidebar"] {
-        background: linear-gradient(180deg,#141E30,#243B55);
-        color:white;
-    }
+[data-testid="stSidebar"] {
+    background: linear-gradient(-45deg,#141E30,#243B55,#0f2027,#2c5364);
+    background-size: 400% 400%;
+    animation: sidebarGradient 12s ease infinite;
+    color:white;
+}
 
-    .nav-button{
-        width:100%;
-        padding:10px;
-        border-radius:8px;
-        background:linear-gradient(135deg,#00c6ff,#0072ff);
-        color:white;
-        text-align:center;
-        font-weight:bold;
-        margin-bottom:10px;
-    }
+/* Sidebar gradient animation */
+@keyframes sidebarGradient {
+0% {background-position:0% 50%;}
+50% {background-position:100% 50%;}
+100% {background-position:0% 50%;}
+}
 
-    </style>
+/* Navigation buttons */
+div.stButton > button {
+    width:100%;
+    padding:10px;
+    border-radius:10px;
+    background: linear-gradient(135deg,#00c6ff,#0072ff);
+    color:white;
+    font-weight:bold;
+    border:none;
+    margin-bottom:8px;
+    transition:0.3s;
+}
+
+/* Hover animation */
+div.stButton > button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg,#ff9966,#ff5e62);
+}
+
+/* About card animation */
+.about-card{
+background: linear-gradient(135deg,#667eea,#764ba2);
+padding:20px;
+border-radius:12px;
+color:white;
+text-align:center;
+box-shadow:0 6px 15px rgba(0,0,0,0.3);
+animation: glow 3s infinite alternate;
+}
+
+@keyframes glow{
+0% {box-shadow:0 0 10px #667eea;}
+100% {box-shadow:0 0 20px #764ba2;}
+}
+
+</style>
     """, unsafe_allow_html=True)
 
 
@@ -769,11 +933,39 @@ else:
 
     elif st.session_state.page == "Job Platforms":
         jobs_page()
-    
+    elif st.session_state.page == "AI Resume Builder":
+        ai_resume_builder()
 
 
     # ---------- Footer ----------
     st.sidebar.markdown("---")
-    st.sidebar.markdown("### 👨‍💻 Developer")
-    st.sidebar.write("Vikas Barigidad")
-    st.sidebar.write("AI & ML Enthusiast 🚀")
+
+    st.sidebar.markdown("""
+    <style>
+
+    .about-card{
+    background: linear-gradient(135deg,#667eea,#764ba2);
+    padding:20px;
+    border-radius:12px;
+    color:white;
+    text-align:center;
+    box-shadow:0 6px 15px rgba(0,0,0,0.3);
+    }
+
+    </style>
+    """, unsafe_allow_html=True)
+
+
+    st.sidebar.markdown("""
+    <div class="about-card">
+
+    <h3>👨‍💻 Developed By</h3>
+
+    <b>Vikas Barigidad</b><br><br>
+
+    🎓 B.E Computer Science<br>
+    🤖 AI & ML Enthusiast<br>
+    🚀 Building AI Projects
+
+    </div>
+    """, unsafe_allow_html=True)
